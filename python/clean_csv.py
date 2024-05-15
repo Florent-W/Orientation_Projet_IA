@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Chargement du fichier CSV
-df = pd.read_csv('../datas/results.csv')
+df = pd.read_csv('./datas/results.csv')
 
 # Conversion de la colonne 'date' en datetime pour faciliter le filtrage
 df['date'] = pd.to_datetime(df['date'])
@@ -19,6 +19,6 @@ filtered_df['home_win'] = (filtered_df['home_score'] > filtered_df['away_score']
 filtered_df = filtered_df.drop(columns=['home_score', 'away_score'])
 
 # Sauvegarde du résultat dans un nouveau fichier CSV
-filtered_df.to_csv('../datas/data_clean.csv', index=False)
+filtered_df.to_csv('./datas/data_clean.csv', index=False)
 
-print("Filtrage et transformation terminés. Les données sont sauvegardées dans '../datas/data_clean.csv'.")
+print("Filtrage et transformation terminés. Les données sont sauvegardées dans '/datas/data_clean.csv'.")
