@@ -16,7 +16,7 @@ filtered_df = df[df.apply(lambda x: x['country'] in x['home_team'], axis=1)]
 filtered_df['home_win'] = (filtered_df['home_score'] > filtered_df['away_score']).astype(bool)
 
 # Suppression des colonnes 'home_score' et 'away_score'
-filtered_df = filtered_df.drop(columns=['home_score', 'away_score'])
+# filtered_df = filtered_df.drop(columns=['home_score', 'away_score'])
 
 # Sauvegarde du résultat dans un nouveau fichier CSV
 filtered_df.to_csv('./datas/data_clean.csv', index=False)
