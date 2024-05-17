@@ -20,5 +20,5 @@ filtered_df['home_win'] = (filtered_df['home_score'] > filtered_df['away_score']
 
 # Sauvegarde du résultat dans un nouveau fichier CSV
 filtered_df.to_csv('./datas/data_clean.csv', index=False)
-
+ 
 print("Filtrage et transformation terminés. Les données sont sauvegardées dans '/datas/data_clean.csv'.")

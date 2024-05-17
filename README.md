@@ -1,9 +1,15 @@
 # Match predict
 
-## Introduction
+## Installation Python
 
-- `pip install pandas scikit-learn tensorflow matplotlib`
+- Installation des dépendances `pip install pandas scikit-learn tensorflow matplotlib fastapi`
 
-- `python3 train.py`
+- Entrainement du modèle `python3 train.py`
 
-- `python3 predict.py`
+- Lancer l'API `fastapi dev predict.py`
+
+## Installation React
+
+- Installation des dépendances `npm install`
+
+- Lancer le front `npm run dev`

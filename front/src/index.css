@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Ferveur Compact";
+  src: url("./assets/fonts/Ferveur_Compact-Black_Italic.woff2");
+}
+
+@layer base {
+  body {
+    @apply bg-primary;
+    @apply font-montserrat;
+    color: white;
+    background-image: url("./assets/bg.svg");
+    background-size: cover;
+    background-position: center;
+  }
+}

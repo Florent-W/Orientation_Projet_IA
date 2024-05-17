@@ -5,35 +5,32 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-# Charger les données (utilisez le bon chemin)
+
+# Ddonnées d'entrainement
 data = pd.read_csv('./datas/data_clean.csv')
 
 # Vérifier les équipes présentes
 available_home_teams = data['home_team'].unique()
 available_away_teams = data['away_team'].unique()
 
-# Sélection des caractéristiques pertinentes
 features = data[['home_team', 'away_team']]
 target = data['home_win']
 
-# Encodage des caractéristiques catégorielles
+# Encodage des données en variables numériques
 features = pd.get_dummies(features)
 
 # Séparation des ensembles de formation et de test
 X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.22)
 
-# Normalisation des caractéristiques
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Création du modèle
 model = LogisticRegression(max_iter=1000)
 
 # Entraînement du modèle
 model.fit(X_train, y_train)
 
-# Prédictions sur l'ensemble de test
 y_pred = model.predict(X_test)
 
 # Évaluation du modèle
