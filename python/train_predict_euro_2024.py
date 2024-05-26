@@ -7,22 +7,19 @@ from sklearn.neighbors import KernelDensity
 import numpy as np
 
 # On charge les données d'entrainement des matchs des pays depuis 2000 pour avoir des données cohérentes
-data = pd.read_csv('data_clean.csv') 
+data = pd.read_csv('./datas/data_clean.csv') 
 
 # On charge un fichier CSV contenant les matchs de l'Euro 2024
-euro_matches = pd.read_csv('data_import.csv', sep=';')
+euro_matches = pd.read_csv('./datas/data_import.csv', sep=';')
 
-# Vérifier les équipes présentes dans les données d'entraînement
 available_home_teams = data['home_team'].unique()
 available_away_teams = data['away_team'].unique()
 
-# Sélection des caractéristiques pertinentes pour l'entraînement
 features = data[['home_team', 'away_team']]
 target_result = data['home_win']
 target_home_score = data['home_score']
 target_away_score = data['away_score']
 
-# Modifier la colonne cible pour inclure les matchs nuls
 def get_match_result(row):
     if row['home_score'] > row['away_score']:
         return 2  # Victoire de l'équipe à domicile
@@ -34,10 +31,8 @@ def get_match_result(row):
 data['match_result'] = data.apply(get_match_result, axis=1)
 target_result = data['match_result']
 
-# Encodage des caractéristiques catégorielles
 features = pd.get_dummies(features)
 
-# Afficher les colonnes de features
 print("Colonnes de features:")
 print(features.columns)
 
@@ -58,7 +53,7 @@ X_test_reg_home = scaler_reg_home.transform(X_test_reg_home)
 X_train_reg_away = scaler_reg_away.fit_transform(X_train_reg_away)
 X_test_reg_away = scaler_reg_away.transform(X_test_reg_away)
 
-# Création du modèle de classification
+# Création du modèle
 model_cls = LogisticRegression(max_iter=1000, multi_class='multinomial')
 
 # Entraînement
@@ -74,7 +69,7 @@ print(f"\nTest Accuracy (Classification): {test_accuracy*100:.2f}%")
 model_home_score = LinearRegression()
 model_away_score = LinearRegression()
 
-# Entraînement des modèles de régression
+# Entraînement
 model_home_score.fit(X_train_reg_home, y_train_home)
 model_away_score.fit(X_train_reg_away, y_train_away)
 
@@ -103,13 +98,11 @@ for index, match in euro_matches.iterrows():
         probability_away_win = None
         probability_draw = None
     else:
-        # Préparation de la nouvelle donnée pour le match
         new_match = pd.DataFrame({'home_team': [home_team], 'away_team': [away_team]})
 
         new_match_encoded = pd.get_dummies(new_match)
         new_match_encoded = new_match_encoded.reindex(columns=features.columns, fill_value=0)
 
-        # Normalisation des nouvelles données
         new_match_normalized_cls = scaler_cls.transform(new_match_encoded)
         new_match_normalized_home = scaler_reg_home.transform(new_match_encoded)
         new_match_normalized_away = scaler_reg_away.transform(new_match_encoded)
@@ -155,10 +148,8 @@ for index, match in euro_matches.iterrows():
 # Convertir les prédictions en DataFrame
 df_predictions = pd.DataFrame(predictions)
 
-# Affichage des prédictions
 print(df_predictions.head())
 
-# Enregistrement dans un fichier CSV avec point-virgule comme séparateur
 predictions_file_path = 'euro_2024_predictions.csv'
 df_predictions.to_csv(predictions_file_path, index=False, sep=';')
 

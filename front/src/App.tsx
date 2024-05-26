@@ -52,7 +52,7 @@ function App() {
   return (
     <div className="h-screen w-screen flex flex-col gap-10 justify-center items-center">
       <h1 className="text-6xl font-bold text-center font-ferveur">
-        The Predictor ⚽️💀
+        The {selectedTeam2 === "AR" ? "Pessitor 💀" : "Predictor ⚽️"}
       </h1>
       <div className="max-w-xl w-full px-9 pt-14 pb-10 border-4 border-white rounded-2xl flex flex-col gap-14 items-center">
         <div className="flex gap-10 items-center">
@@ -93,7 +93,9 @@ function App() {
             <img
               src={
                 selectedTeam2.length
-                  ? `https://flagcdn.com/${selectedTeam2.toLowerCase()}.svg`
+                  ? selectedTeam2 === "AR"
+                    ? "/pessi.webp"
+                    : `https://flagcdn.com/${selectedTeam2.toLowerCase()}.svg`
                   : "/no_team.svg"
               }
               className="rounded-xl object-cover w-[200px] aspect-[4.5/3]"
@@ -107,7 +109,7 @@ function App() {
                 Select a team
               </option>
               {teams
-                .filter((team) => team.team !== selectedTeam1)
+                // .filter((team) => team.country_code !== selectedTeam1)
                 .sort((a, b) => a.team.localeCompare(b.team))
                 .map((country, index) => (
                   <option key={index} value={country.country_code}>

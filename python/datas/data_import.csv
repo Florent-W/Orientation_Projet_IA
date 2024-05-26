@@ -1,0 +1,37 @@
+﻿home_team;away_team;date;city
+Germany;Scotland;14/06/2024;Munich
+Hungary;Switzerland;15/06/2024;Cologne
+Germany;Hungary;19/06/2024;Stuttgart
+Scotland;Switzerland;19/06/2024;Cologne
+Switzerland;Germany;23/06/2024;Frankfurt
+Scotland;Hungary;23/06/2024;Stuttgart
+Spain;Croatia;15/06/2024;Berlin
+Italy;Albania;15/06/2024;Dortmund
+Croatia;Albania;19/06/2024;Hamburg
+Spain;Italy;20/06/2024;Gelsenkirchen
+Croatia;Italy;24/06/2024;Leipzig
+Albania;Spain;24/06/2024;Düsseldorf
+Slovenia;Denmark;16/06/2024;Stuttgart
+Serbia;England;16/06/2024;Gelsenkirchen
+Slovenia;Serbia;20/06/2024;Munich
+Denmark;England;20/06/2024;Frankfurt
+England;Slovenia;25/06/2024;Cologne
+Denmark;Serbia;25/06/2024;Munich
+Poland;Netherlands;16/06/2024;Hamburg
+Austria;France;17/06/2024;Düsseldorf
+Poland;Austria;21/06/2024;Berlin
+Netherlands;France;21/06/2024;Leipzig
+Netherlands;Austria;25/06/2024;Berlin
+France;Poland;25/06/2024;Dortmund
+Romania;Ukraine;17/06/2024;Munich
+Belgium;Slovakia;17/06/2024;Frankfurt
+Slovakia;Ukraine;21/06/2024;Düsseldorf
+Belgium;Romania;22/06/2024;Cologne
+Slovakia;Romania;26/06/2024;Frankfurt
+Ukraine;Belgium;26/06/2024;Stuttgart
+Turkey;Georgia;18/06/2024;Dortmund
+Portugal;Czech Republic;18/06/2024;Leipzig
+Georgia;Czech Republic;22/06/2024;Hamburg
+Turkey;Portugal;22/06/2024;Dortmund
+Czech Republic;Turkey;26/06/2024;Hamburg
+Georgia;Portugal;26/06/2024;Gelsenkirchen

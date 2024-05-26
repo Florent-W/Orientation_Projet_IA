@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 
-# Ddonnées d'entrainement
+# Données d'entrainement
 data = pd.read_csv('./datas/data_clean.csv')
 
 # Vérifier les équipes présentes

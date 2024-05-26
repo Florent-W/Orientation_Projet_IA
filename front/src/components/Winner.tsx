@@ -15,7 +15,8 @@ export default function Winner({ winner }: { winner: Winner }) {
           <span className="bg-white text-primary px-3">
             {Math.round(winner.prediction_score * 100)}%
           </span>{" "}
-          de probabilité de gagner
+          de probabilité de{" "}
+          {winner.country_code === "AR" ? "pénalty" : "gagner"}
         </p>
       </div>
     </div>
