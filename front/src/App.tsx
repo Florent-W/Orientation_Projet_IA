@@ -9,6 +9,9 @@ import Winner from "./components/Winner";
 function App() {
   const [selectedTeam1, setSelectedTeam1] = useState("");
   const [selectedTeam2, setSelectedTeam2] = useState("");
+  const [selectedTournament, setSelectedTournament] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<null | {
     team: string;
@@ -36,6 +39,9 @@ function App() {
       const response = await axios.post("http://localhost:8000/predict", {
         team1: searchTeamByCode(selectedTeam1),
         team2: searchTeamByCode(selectedTeam2),
+        tournament: selectedTournament || undefined,
+        city: selectedCity || undefined,
+        country: selectedCountry || undefined
       });
 
       const data = await response.data;
@@ -71,10 +77,11 @@ function App() {
 
             <select
               className="w-full p-2 border border-white rounded-lg text-black"
+              value={selectedTeam1}
               onChange={(e) => setSelectedTeam1(e.target.value)}
             >
-              <option value="" disabled selected>
-                Select a team
+              <option value="" disabled>
+                Sélection d'une équipe
               </option>
               {teams
                 .sort((a, b) => a.team.localeCompare(b.team))
@@ -105,11 +112,12 @@ function App() {
             />
 
             <select
+              value={selectedTeam2}
               className="w-full p-2 border border-white rounded-lg text-black"
               onChange={(e) => setSelectedTeam2(e.target.value)}
             >
-              <option value="" disabled selected>
-                Select a team
+              <option value="" disabled>
+                Sélectionn d'une équipe
               </option>
               {teams
                 // .filter((team) => team.country_code !== selectedTeam1)
@@ -127,9 +135,11 @@ function App() {
         <h1>Paramètres</h1>
         <select
             className="w-full p-2 border border-white rounded-lg text-black"
+            value={selectedTournament}
+            onChange={(e) => setSelectedTournament(e.target.value)}
           >
-            <option value="" disabled selected>
-              Select a tournament
+            <option value="" disabled>
+              Sélection d'un tournoi
             </option>
             {tournaments.map((tournament, index) => (
               <option key={index} value={tournament}>
@@ -140,9 +150,11 @@ function App() {
 
           <select
             className="w-full p-2 border border-white rounded-lg text-black"
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
           >
-            <option value="" disabled selected>
-              Select a city
+            <option value="" disabled>
+              Sélection d'une ville
             </option>
             {cities.map((city, index) => (
               <option key={index} value={city}>
@@ -152,9 +164,11 @@ function App() {
           </select>
           <select
             className="w-full p-2 border border-white rounded-lg text-black"
+            value={selectedCountry}
+            onChange={(e) => setSelectedCountry(e.target.value)}
           >
-            <option value="" disabled selected>
-              Select a country
+            <option value="" disabled>
+              Sélection d'un pays
             </option>
             {countries.map((country, index) => (
               <option key={index} value={country}>
