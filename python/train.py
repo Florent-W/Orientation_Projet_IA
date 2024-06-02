@@ -5,7 +5,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-
 # Données d'entrainement
 data = pd.read_csv('./datas/data_clean.csv')
 
