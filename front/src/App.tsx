@@ -12,6 +12,9 @@ function App() {
   const [selectedTournament, setSelectedTournament] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [homeScore, setHomeScore] = useState<number | null>(null);
+  const [awayScore, setAwayScore] = useState<number | null>(null);
+  const [drawProbability, setDrawProbability] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<null | {
     team: string;
@@ -30,10 +33,13 @@ function App() {
   const handleSimulate = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setWinner(null);
+    setHomeScore(null);
+    setAwayScore(null);
+    setDrawProbability(null);
     setLoading(true);
     try {
       if (!selectedTeam1 || !selectedTeam2) {
-        return alert("Please select two teams");
+        return alert("Veuillez sélectionner deux équipes.");
       }
 
       const response = await axios.post("http://localhost:8000/predict", {
@@ -46,11 +52,18 @@ function App() {
 
       const data = await response.data;
 
-      const getWinner = searchTeameByName(data.winner as string);
-
-      if (getWinner) {
-        setWinner({ ...getWinner, prediction_score: data.prediction_score });
+      if (data.winner === "draw") {
+        setWinner(null);
+        setDrawProbability(data.prediction_score);
+      } else {
+        const getWinner = searchTeameByName(data.winner as string);
+        if (getWinner) {
+          setWinner({ ...getWinner, prediction_score: data.prediction_score });
+        }
       }
+      
+      setHomeScore(data.home_score);
+      setAwayScore(data.away_score);
     } catch (error) {
       console.error(error);
     } finally {
@@ -91,6 +104,11 @@ function App() {
                   </option>
                 ))}
             </select>
+            {homeScore !== null && (
+            <div className="text-xl font-bold">
+              Score prédit : {homeScore}
+            </div>
+          )}
           </div>
 
           <div className="h-32 w-[1px] bg-white font-ferveur relative">
@@ -117,7 +135,7 @@ function App() {
               onChange={(e) => setSelectedTeam2(e.target.value)}
             >
               <option value="" disabled>
-                Sélectionn d'une équipe
+                Sélection d'une équipe
               </option>
               {teams
                 // .filter((team) => team.country_code !== selectedTeam1)
@@ -128,6 +146,11 @@ function App() {
                   </option>
                 ))}
             </select>
+            {awayScore !== null && (
+            <div className="text-xl font-bold">
+              Score prédit : {awayScore}
+            </div>
+          )}
           </div>
         </div>
 
@@ -186,7 +209,14 @@ function App() {
         </button>
       </div>
 
+
       {winner ? <Winner winner={winner} /> : null}
+      {winner === null && homeScore !== null && awayScore !== null && drawProbability !== null && (
+        <div className="text-xl font-bold">
+          Match nul prédit : {homeScore} - {awayScore}
+          ({(drawProbability)}% de probabilité de faire match nul)
+        </div>
+      )}
     </div>
   );
 }
