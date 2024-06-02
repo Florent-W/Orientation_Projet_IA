@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { teams } from "./data/teams.json";
+import { cities } from "./data/all_cities.json";
+import { countries } from "./data/all_countries.json";
+import { tournaments } from "./data/all_tournaments.json";
 import axios from "axios";
 import Winner from "./components/Winner";
 
@@ -50,7 +53,7 @@ function App() {
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col gap-10 justify-center items-center">
+    <div className="min-h-screen w-screen flex flex-col gap-10 justify-center items-center py-10 overflow-auto">
       <h1 className="text-6xl font-bold text-center font-ferveur">
         The {selectedTeam2 === "AR" ? "Pessitor 💀" : "Predictor ⚽️"}
       </h1>
@@ -119,6 +122,48 @@ function App() {
             </select>
           </div>
         </div>
+
+        <div className="flex flex-col gap-4 w-full">
+        <h1>Paramètres</h1>
+        <select
+            className="w-full p-2 border border-white rounded-lg text-black"
+          >
+            <option value="" disabled selected>
+              Select a tournament
+            </option>
+            {tournaments.map((tournament, index) => (
+              <option key={index} value={tournament}>
+                {tournament}
+              </option>
+            ))}
+          </select>
+
+          <select
+            className="w-full p-2 border border-white rounded-lg text-black"
+          >
+            <option value="" disabled selected>
+              Select a city
+            </option>
+            {cities.map((city, index) => (
+              <option key={index} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+          <select
+            className="w-full p-2 border border-white rounded-lg text-black"
+          >
+            <option value="" disabled selected>
+              Select a country
+            </option>
+            {countries.map((country, index) => (
+              <option key={index} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <button
           className="bg-[#003DA8] hover:bg-[#043275] text-white px-4 py-4 rounded-lg font-bold uppercase text-xl w-full transition-all duration-300"
           onClick={handleSimulate}
