@@ -1,4 +1,9 @@
-# Match predict
+# The Predictor
+
+Equipe :
+- Florent Weltmann
+- Dantin Durand
+- Bryan Kwuimo Kwekam 
 
 ## Installation Python
 
