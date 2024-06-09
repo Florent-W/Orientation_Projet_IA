@@ -1,37 +1,37 @@
-﻿home_team;away_team;date;city
-Germany;Scotland;14/06/2024;Munich
-Hungary;Switzerland;15/06/2024;Cologne
-Germany;Hungary;19/06/2024;Stuttgart
-Scotland;Switzerland;19/06/2024;Cologne
-Switzerland;Germany;23/06/2024;Frankfurt
-Scotland;Hungary;23/06/2024;Stuttgart
-Spain;Croatia;15/06/2024;Berlin
-Italy;Albania;15/06/2024;Dortmund
-Croatia;Albania;19/06/2024;Hamburg
-Spain;Italy;20/06/2024;Gelsenkirchen
-Croatia;Italy;24/06/2024;Leipzig
-Albania;Spain;24/06/2024;Düsseldorf
-Slovenia;Denmark;16/06/2024;Stuttgart
-Serbia;England;16/06/2024;Gelsenkirchen
-Slovenia;Serbia;20/06/2024;Munich
-Denmark;England;20/06/2024;Frankfurt
-England;Slovenia;25/06/2024;Cologne
-Denmark;Serbia;25/06/2024;Munich
-Poland;Netherlands;16/06/2024;Hamburg
-Austria;France;17/06/2024;Düsseldorf
-Poland;Austria;21/06/2024;Berlin
-Netherlands;France;21/06/2024;Leipzig
-Netherlands;Austria;25/06/2024;Berlin
-France;Poland;25/06/2024;Dortmund
-Romania;Ukraine;17/06/2024;Munich
-Belgium;Slovakia;17/06/2024;Frankfurt
-Slovakia;Ukraine;21/06/2024;Düsseldorf
-Belgium;Romania;22/06/2024;Cologne
-Slovakia;Romania;26/06/2024;Frankfurt
-Ukraine;Belgium;26/06/2024;Stuttgart
-Turkey;Georgia;18/06/2024;Dortmund
-Portugal;Czech Republic;18/06/2024;Leipzig
-Georgia;Czech Republic;22/06/2024;Hamburg
-Turkey;Portugal;22/06/2024;Dortmund
-Czech Republic;Turkey;26/06/2024;Hamburg
-Georgia;Portugal;26/06/2024;Gelsenkirchen
+﻿home_team;away_team;date;city;country;tournament;group
+Germany;Scotland;14/06/2024;Munich;Germany;UEFA Euro;A
+Hungary;Switzerland;15/06/2024;Cologne;Germany;UEFA Euro;A
+Germany;Hungary;19/06/2024;Stuttgart;Germany;UEFA Euro;A
+Scotland;Switzerland;19/06/2024;Cologne;Germany;UEFA Euro;A
+Switzerland;Germany;23/06/2024;Frankfurt;Germany;UEFA Euro;A
+Scotland;Hungary;23/06/2024;Stuttgart;Germany;UEFA Euro;A
+Spain;Croatia;15/06/2024;Berlin;Germany;UEFA Euro;B
+Italy;Albania;15/06/2024;Dortmund;Germany;UEFA Euro;B
+Croatia;Albania;19/06/2024;Hamburg;Germany;UEFA Euro;B
+Spain;Italy;20/06/2024;Gelsenkirchen;Germany;UEFA Euro;B
+Croatia;Italy;24/06/2024;Leipzig;Germany;UEFA Euro;B
+Albania;Spain;24/06/2024;Düsseldorf;Germany;UEFA Euro;B
+Slovenia;Denmark;16/06/2024;Stuttgart;Germany;UEFA Euro;C
+Serbia;England;16/06/2024;Gelsenkirchen;Germany;UEFA Euro;C
+Slovenia;Serbia;20/06/2024;Munich;Germany;UEFA Euro;C
+Denmark;England;20/06/2024;Frankfurt;Germany;UEFA Euro;C
+England;Slovenia;25/06/2024;Cologne;Germany;UEFA Euro;C
+Denmark;Serbia;25/06/2024;Munich;Germany;UEFA Euro;C
+Poland;Netherlands;16/06/2024;Hamburg;Germany;UEFA Euro;D
+Austria;France;17/06/2024;Düsseldorf;Germany;UEFA Euro;D
+Poland;Austria;21/06/2024;Berlin;Germany;UEFA Euro;D
+Netherlands;France;21/06/2024;Leipzig;Germany;UEFA Euro;D
+Netherlands;Austria;25/06/2024;Berlin;Germany;UEFA Euro;D
+France;Poland;25/06/2024;Dortmund;Germany;UEFA Euro;D
+Romania;Ukraine;17/06/2024;Munich;Germany;UEFA Euro;E
+Belgium;Slovakia;17/06/2024;Frankfurt;Germany;UEFA Euro;E
+Slovakia;Ukraine;21/06/2024;Düsseldorf;Germany;UEFA Euro;E
+Belgium;Romania;22/06/2024;Cologne;Germany;UEFA Euro;E
+Slovakia;Romania;26/06/2024;Frankfurt;Germany;UEFA Euro;E
+Ukraine;Belgium;26/06/2024;Stuttgart;Germany;UEFA Euro;E
+Turkey;Georgia;18/06/2024;Dortmund;Germany;UEFA Euro;F
+Portugal;Czech Republic;18/06/2024;Leipzig;Germany;UEFA Euro;F
+Georgia;Czech Republic;22/06/2024;Hamburg;Germany;UEFA Euro;F
+Turkey;Portugal;22/06/2024;Dortmund;Germany;UEFA Euro;F
+Czech Republic;Turkey;26/06/2024;Hamburg;Germany;UEFA Euro;F
+Georgia;Portugal;26/06/2024;Gelsenkirchen;Germany;UEFA Euro;F

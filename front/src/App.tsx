@@ -1,12 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { teams } from "./data/teams.json";
 import { cities } from "./data/all_cities.json";
 import { countries } from "./data/all_countries.json";
 import { tournaments } from "./data/all_tournaments.json";
 import axios from "axios";
 import Winner from "./components/Winner";
+import Euro from "./components/Euro";
 
-function App() {
+function Main() {
   const [selectedTeam1, setSelectedTeam1] = useState("");
   const [selectedTeam2, setSelectedTeam2] = useState("");
   const [selectedTournament, setSelectedTournament] = useState("");
@@ -21,6 +23,10 @@ function App() {
     country_code: string;
     prediction_score: number;
   }>(null);
+
+  useEffect(() => {
+    document.title = "The Predictor";
+  }, []);
 
   const searchTeamByCode = (code: string) => {
     return teams.find((team) => team.country_code === code)?.team;
@@ -209,15 +215,45 @@ function App() {
         </button>
       </div>
 
-
       {winner ? <Winner winner={winner} /> : null}
       {winner === null && homeScore !== null && awayScore !== null && drawProbability !== null && (
         <div className="text-xl font-bold">
           Match nul prédit : {homeScore} - {awayScore}
-          ({(drawProbability)}% de probabilité de faire match nul)
+          ({drawProbability}% de probabilité de faire match nul)
         </div>
       )}
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <div>
+      <nav className="flex justify-center mt-5">
+          <ul className="flex space-x-4">
+            <li>
+              <Link to="/">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Matchs
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/euro">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Euro
+                </button>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/euro" element={<Euro />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

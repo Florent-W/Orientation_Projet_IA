@@ -24,56 +24,33 @@ class PredictionParams(BaseModel):
     city: Optional[str] = None
     country: Optional[str] = None
 
-@app.post("/predict")
-async def predict_match(params: PredictionParams):
-    # Charger les données d'entraînement pour vérifier les valeurs valides
-    data_teams = pd.read_csv('./datas/all_teams.csv')
-    data_tournaments = pd.read_csv('./datas/all_tournaments.csv')
-    data_cities = pd.read_csv('./datas/all_cities.csv')
-    data_countries = pd.read_csv('./datas/all_countries.csv')
+# Charger les modèles et les scalers
+result_model = joblib.load('result_model.pkl')
+home_score_model = joblib.load('home_score_model.pkl')
+away_score_model = joblib.load('away_score_model.pkl')
+scaler_cls = joblib.load('scaler_cls.pkl')
+scaler_reg_home = joblib.load('scaler_reg_home.pkl')
+scaler_reg_away = joblib.load('scaler_reg_away.pkl')
+features = joblib.load('features.pkl')
 
-    # Identifier les colonnes dans les fichiers chargés
-    print("Colonnes disponibles dans all_teams.csv:", data_teams.columns)
-    print("Colonnes disponibles dans all_tournaments.csv:", data_tournaments.columns)
-    print("Colonnes disponibles dans all_cities.csv:", data_cities.columns)
-    print("Colonnes disponibles dans all_countries.csv:", data_countries.columns)
+def prepare_encoded_data(data, features):
+    encoded_data = pd.get_dummies(data)
+    missing_cols = list(set(features) - set(encoded_data.columns))
+    missing_data = pd.DataFrame(0, index=encoded_data.index, columns=missing_cols)
+    encoded_data = pd.concat([encoded_data, missing_data], axis=1)
+    encoded_data = encoded_data[features]
+    return encoded_data
 
-    # Vérification des équipes présentes
-    available_teams = data_teams.iloc[:, 0].unique()
-    available_tournaments = data_tournaments.iloc[:, 0].unique()
-    available_cities = data_cities.iloc[:, 0].unique()
-    available_countries = data_countries.iloc[:, 0].unique()
-
-    if params.team1 not in available_teams or params.team2 not in available_teams:
-        raise HTTPException(status_code=400, detail="L'une des équipes n'existe pas dans les données d'entraînement.")
-
-    if params.tournament and params.tournament not in available_tournaments:
-        raise HTTPException(status_code=400, detail="Le tournoi n'existe pas dans les données d'entraînement.")
-    if params.city and params.city not in available_cities:
-        raise HTTPException(status_code=400, detail="La ville n'existe pas dans les données d'entraînement.")
-    if params.country and params.country not in available_countries:
-        raise HTTPException(status_code=400, detail="Le pays n'existe pas dans les données d'entraînement.")
-
-    # Chargement des modèles
-    result_model = joblib.load("result_model.pkl")
-    home_score_model = joblib.load("home_score_model.pkl")
-    away_score_model = joblib.load("away_score_model.pkl")
-    scaler_cls = joblib.load("scaler_cls.pkl")
-    scaler_reg_home = joblib.load("scaler_reg_home.pkl")
-    scaler_reg_away = joblib.load("scaler_reg_away.pkl")
-    features = joblib.load("features.pkl")
-
-    # Préparation des nouvelles données
+def predict_match_data(home_team, away_team, tournament=None, city=None, country=None):
     new_match = pd.DataFrame({
-        'home_team': [params.team1],
-        'away_team': [params.team2],
-        'tournament': [params.tournament] if params.tournament else ['Unknown'],
-        'city': [params.city] if params.city else ['Unknown'],
-        'country': [params.country] if params.country else ['Unknown']
+        'home_team': [home_team],
+        'away_team': [away_team],
+        'tournament': [tournament] if tournament else ['Unknown'],
+        'city': [city] if city else ['Unknown'],
+        'country': [country] if country else ['Unknown']
     })
 
-    new_match_encoded = pd.get_dummies(new_match)
-    new_match_encoded = new_match_encoded.reindex(columns=features, fill_value=0)
+    new_match_encoded = prepare_encoded_data(new_match, features)
     new_match_normalized_cls = scaler_cls.transform(new_match_encoded)
     new_match_normalized_home = scaler_reg_home.transform(new_match_encoded)
     new_match_normalized_away = scaler_reg_away.transform(new_match_encoded)
@@ -81,9 +58,6 @@ async def predict_match(params: PredictionParams):
     # Prédiction de l'issue du match
     prediction = result_model.predict(new_match_normalized_cls)
     prediction_proba = result_model.predict_proba(new_match_normalized_cls)
-
-    # Vérifier l'ordre des probabilités
-    print(f"Probabilités prédictives : {prediction_proba}")
 
     # Prédiction des scores
     home_score = home_score_model.predict(new_match_normalized_home)[0]
@@ -108,22 +82,86 @@ async def predict_match(params: PredictionParams):
     # Déterminer le résultat du match basé sur les scores prédits
     if home_score > away_score:
         return {
-            "winner": params.team1,
+            "home_team": home_team,
+            "away_team": away_team,
+            "winner": home_team,
             "prediction_score": round(proba_home_win, 2),
             "home_score": home_score,
             "away_score": away_score
         }
     elif away_score > home_score:
         return {
-            "winner": params.team2,
+            "home_team": home_team,
+            "away_team": away_team,
+            "winner": away_team,
             "prediction_score": round(proba_away_win, 2),
             "home_score": home_score,
             "away_score": away_score
         }
     else:
         return {
+            "home_team": home_team,
+            "away_team": away_team,
             "winner": "draw",
             "prediction_score": round(proba_draw, 2),
             "home_score": home_score,
             "away_score": away_score
         }
+
+@app.post("/predict")
+async def predict_match(params: PredictionParams):
+    data_teams = pd.read_csv('./datas/all_teams.csv')
+    data_tournaments = pd.read_csv('./datas/all_tournaments.csv')
+    data_cities = pd.read_csv('./datas/all_cities.csv')
+    data_countries = pd.read_csv('./datas/all_countries.csv')
+
+    # Vérification des équipes présentes
+    available_teams = data_teams.iloc[:, 0].unique()
+    available_tournaments = data_tournaments.iloc[:, 0].unique()
+    available_cities = data_cities.iloc[:, 0].unique()
+    available_countries = data_countries.iloc[:, 0].unique()
+
+    if params.team1 not in available_teams or params.team2 not in available_teams:
+        raise HTTPException(status_code=400, detail="L'une des équipes n'existe pas dans les données d'entraînement.")
+
+    if params.tournament and params.tournament not in available_tournaments:
+        raise HTTPException(status_code=400, detail="Le tournoi n'existe pas dans les données d'entraînement.")
+    if params.city and params.city not in available_cities:
+        raise HTTPException(status_code=400, detail="La ville n'existe pas dans les données d'entraînement.")
+    if params.country and params.country not in available_countries:
+        raise HTTPException(status_code=400, detail="Le pays n'existe pas dans les données d'entraînement.")
+
+    return predict_match_data(params.team1, params.team2, params.tournament, params.city, params.country)
+
+def run_predictions():
+    data_path = 'datas/data_import.csv'
+    matches_data = pd.read_csv(data_path, sep=';')
+    predictions = matches_data.apply(lambda row: predict_match_data(
+        row['home_team'], 
+        row['away_team'], 
+        row['tournament'] if 'tournament' in row else None, 
+        row['city'] if 'city' in row else None, 
+        row['country'] if 'country' in row else None
+    ), axis=1)
+    predictions_df = pd.DataFrame(predictions.tolist())
+    predictions_df['group'] = matches_data['group']
+    predictions_df['home_team'] = matches_data['home_team']
+    predictions_df['away_team'] = matches_data['away_team']
+    predictions_df['tournament'] = matches_data['tournament']
+    predictions_df['city'] = matches_data['city']
+    predictions_df['country'] = matches_data['country']
+    predictions_df.to_csv('datas/euro_predicted_results.csv', index=False)
+
+@app.on_event("startup")
+async def startup_event():
+    run_predictions()
+
+@app.get("/predictions")
+async def get_predictions():
+    euro_results_path = 'datas/euro_predicted_results.csv'
+    predictions_df = pd.read_csv(euro_results_path)
+    return predictions_df.to_dict(orient="records")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
