@@ -25,13 +25,13 @@ class PredictionParams(BaseModel):
     country: Optional[str] = None
 
 # Charger les modèles et les scalers
-result_model = joblib.load('result_model.pkl')
-home_score_model = joblib.load('home_score_model.pkl')
-away_score_model = joblib.load('away_score_model.pkl')
-scaler_cls = joblib.load('scaler_cls.pkl')
-scaler_reg_home = joblib.load('scaler_reg_home.pkl')
-scaler_reg_away = joblib.load('scaler_reg_away.pkl')
-features = joblib.load('features.pkl')
+result_model = joblib.load('models/result_model.pkl')
+home_score_model = joblib.load('models/home_score_model.pkl')
+away_score_model = joblib.load('models/away_score_model.pkl')
+scaler_cls = joblib.load('scalers/scaler_cls.pkl')
+scaler_reg_home = joblib.load('scalers/scaler_reg_home.pkl')
+scaler_reg_away = joblib.load('scalers/scaler_reg_away.pkl')
+features = joblib.load('models/features.pkl')
 
 def prepare_encoded_data(data, features):
     encoded_data = pd.get_dummies(data)
