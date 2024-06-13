@@ -1,17 +1,16 @@
 # The Predictor
 
 Equipe :
+
 - Florent Weltmann
 - Dantin Durand
-- Bryan Kwuimo Kwekam 
+- Bryan Kwuimo Kwekam
 
 ## Installation Python
 
 - Installation des dépendances `pip install pandas scikit-learn tensorflow matplotlib fastapi`
 
 - Allez dans le réperoire python en étant à la racine du projet et entrez la commande `cd python`
-
-- Extraction des valeurs depuis le data_clean.csv `python clean_csv_values.py`
 
 - Entrainement du modèle `python train.py`
 

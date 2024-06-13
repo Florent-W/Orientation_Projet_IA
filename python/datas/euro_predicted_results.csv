@@ -1,0 +1,37 @@
+home_team,away_team,winner,prediction_score,home_score,away_score,group,tournament,city,country
+Germany,Scotland,Germany,69.93,2,1,A,UEFA Euro,Munich,Germany
+Hungary,Switzerland,draw,37.27,2,2,A,UEFA Euro,Cologne,Germany
+Germany,Hungary,Germany,91.91,3,0,A,UEFA Euro,Stuttgart,Germany
+Scotland,Switzerland,draw,39.75,2,2,A,UEFA Euro,Cologne,Germany
+Switzerland,Germany,Switzerland,99.68,3,2,A,UEFA Euro,Frankfurt,Germany
+Scotland,Hungary,Scotland,84.4,2,0,A,UEFA Euro,Stuttgart,Germany
+Spain,Croatia,draw,30.13,1,1,B,UEFA Euro,Berlin,Germany
+Italy,Albania,Italy,88.75,1,0,B,UEFA Euro,Dortmund,Germany
+Croatia,Albania,Croatia,65.86,1,0,B,UEFA Euro,Hamburg,Germany
+Spain,Italy,Italy,27.47,1,2,B,UEFA Euro,Gelsenkirchen,Germany
+Croatia,Italy,draw,0.13,1,1,B,UEFA Euro,Leipzig,Germany
+Albania,Spain,Spain,74.8,0,1,B,UEFA Euro,Düsseldorf,Germany
+Slovenia,Denmark,Slovenia,50.01,2,1,C,UEFA Euro,Stuttgart,Germany
+Serbia,England,England,59.82,1,2,C,UEFA Euro,Gelsenkirchen,Germany
+Slovenia,Serbia,draw,26.53,1,1,C,UEFA Euro,Munich,Germany
+Denmark,England,Denmark,99.79,3,1,C,UEFA Euro,Frankfurt,Germany
+England,Slovenia,England,33.4,2,1,C,UEFA Euro,Cologne,Germany
+Denmark,Serbia,Denmark,42.35,2,1,C,UEFA Euro,Munich,Germany
+Poland,Netherlands,draw,34.62,1,1,D,UEFA Euro,Hamburg,Germany
+Austria,France,France,69.8,0,1,D,UEFA Euro,Düsseldorf,Germany
+Poland,Austria,draw,25.7,1,1,D,UEFA Euro,Berlin,Germany
+Netherlands,France,draw,0.09,1,1,D,UEFA Euro,Leipzig,Germany
+Netherlands,Austria,Netherlands,25.64,2,1,D,UEFA Euro,Berlin,Germany
+France,Poland,draw,25.22,1,1,D,UEFA Euro,Dortmund,Germany
+Romania,Ukraine,draw,40.34,1,1,E,UEFA Euro,Munich,Germany
+Belgium,Slovakia,Belgium,99.96,3,1,E,UEFA Euro,Frankfurt,Germany
+Slovakia,Ukraine,draw,49.22,1,1,E,UEFA Euro,Düsseldorf,Germany
+Belgium,Romania,draw,46.09,2,2,E,UEFA Euro,Cologne,Germany
+Slovakia,Romania,Slovakia,99.92,3,1,E,UEFA Euro,Frankfurt,Germany
+Ukraine,Belgium,Ukraine,59.64,2,1,E,UEFA Euro,Stuttgart,Germany
+Turkey,Georgia,Turkey,82.68,2,1,F,UEFA Euro,Dortmund,Germany
+Portugal,Czech Republic,draw,0.05,1,1,F,UEFA Euro,Leipzig,Germany
+Georgia,Czech Republic,draw,46.44,1,1,F,UEFA Euro,Hamburg,Germany
+Turkey,Portugal,Portugal,28.91,0,1,F,UEFA Euro,Dortmund,Germany
+Czech Republic,Turkey,draw,31.18,1,1,F,UEFA Euro,Hamburg,Germany
+Georgia,Portugal,Portugal,61.38,0,2,F,UEFA Euro,Gelsenkirchen,Germany
